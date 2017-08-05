@@ -30,6 +30,12 @@
                 display: inline-block;
                 /* vertical-align: top; */
             }
+
+            #activitiesbox {
+                overflow: scroll; 
+                height: 200px;
+            }
+
         </style>
     </head>
 
@@ -79,10 +85,14 @@
         <div>
             <h3>Activities:</h3>
             <div id="activitiesbox">
-                {% for x in session['activity'] %}
-                    <p>Earned {{x[1]}} golds from the {{x[0]}}!  {{x[2]}}</p>
-
-                {% endfor %}
+                    {% for x in session['activity'] %}
+                        {% if x[1] >= 0 %}
+                            <p style="color:green">Earned {{x[1]}} golds from the {{x[0]}}!  {{x[2]}}</p>
+                        {% else %}
+                            <p style="color:red">Lost {{x[1]}} golds from the {{x[0]}}! Ouch!!!!!  {{x[2]}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    
                 
             </div>
         </div>
